@@ -10,12 +10,12 @@ fs.readdir('./', (err, files)=>{
       return fs.statSync(file).isFile() && /.*\.heic$/.test(file);
     })
 
-    heicFiles.forEach((file, i)=> {
-      convertJPEG(file, i)
+    heicFiles.forEach((file)=> {
+      convertJPEG(file)
     });
 });
 
-async function convertJPEG(file, i) {
+async function convertJPEG(file) {
   try{
     const fileName = file.replace("heic", "jpg") //名前変換
     const inputBuffer = await promisify(fs.readFile)(`./${file}`);
